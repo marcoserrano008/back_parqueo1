@@ -16,12 +16,25 @@ class AuthController extends Controller
         $user = User::create([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
+            'apellidoPaterno' => $request->input('paterno'),
+            'apellidoMaterno' => $request->input('materno'),
+            'ci' => $request->input('ci'),
             'password'=> Hash::make($request->input('password')),
+            'rol'=>'cliente',
         ]);
 
         return $user;
     }
+
+    public function getRol()
+    {
+        $user = Auth::user();
+        $rol = $user->rol;
+        return ['rol' => $rol];
+    }
     
+
+
     public function login(Request $request)
     {
         if(!Auth::attempt($request->only('email','password'))){
