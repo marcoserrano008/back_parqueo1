@@ -23,6 +23,12 @@ class DatabaseSeeder extends Seeder
             BloquesTableSeeder::class,
             EspaciosTableSeeder::class,
             DefaulUsersSeeder::class,
+            ClientesTableSeeder::class,
+            GuardiasTableSeeder::class,
+            VehiculoTableSeeder::class,
+            ReservasTableSeeder::class,
+            IngresosParqueoTableSeeder::class,
+            SalidasParqueoTableSeeder::class,
         ]);
     }
 }

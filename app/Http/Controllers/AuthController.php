@@ -3,26 +3,44 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Cliente;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Hash;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\DB;
+
 
 class AuthController extends Controller
 {
     public function register(Request $request)
     {
-        $user = User::create([
-            'name' => $request->input('name'),
-            'email' => $request->input('email'),
-            'apellidoPaterno' => $request->input('paterno'),
-            'apellidoMaterno' => $request->input('materno'),
-            'ci' => $request->input('ci'),
-            'password'=> Hash::make($request->input('password')),
-            'rol'=>'cliente',
-        ]);
-
+        DB::beginTransaction();
+    
+        try {
+            $user = User::create([
+                'name' => $request->input('name'),
+                'email' => $request->input('email'),
+                'apellidoPaterno' => $request->input('paterno'),
+                'apellidoMaterno' => $request->input('materno'),
+                'ci' => $request->input('ci'),
+                'password' => Hash::make($request->input('password')),
+                'rol' => 'cliente',
+                'fechaNacimiento' => $request->input('fechaNacimiento'),
+            ]);
+    
+            Cliente::create([
+                'id_cliente' => intval($request->input('ci')),
+                'id_usuario' => $user->id,
+            ]);
+    
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json(['error' => 'Ocurrió un error durante el registro'], 500);
+        }
+    
         return $user;
     }
 

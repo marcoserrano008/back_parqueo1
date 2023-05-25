@@ -14,11 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('SalidasParqueo', function (Blueprint $table) {
-            $table->integer('id_salida')->primary();
-            $table->string('id_vehiculo', 45)->nullable()->index('fk_id_vehiculo_idx');
+            $table->increments('id_salida')->start(1000);
+            $table->unsignedInteger('id_vehiculo')->nullable()->index('fk_id_vehiculo_idx');
             $table->time('hora_salida')->nullable();
             $table->date('fecha_salida')->nullable();
-            $table->integer('id_ingreso')->nullable()->index('fk_id_salida_idx');
+            $table->unsignedInteger('id_ingreso')->nullable()->index('fk_id_salida_idx');
+            $table->string('placa_vehiculo', 20)->nullable();
         });
     }
 

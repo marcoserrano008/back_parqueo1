@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('Precios', function (Blueprint $table) {
             $table->string('id_precio', 25)->primary();
-            $table->string('id_rol', 25)->nullable()->index('id_rol_idx');
+            
             $table->integer('primera_hora')->nullable();
             $table->integer('hora_adicional')->nullable();
             $table->date('fecha')->nullable();

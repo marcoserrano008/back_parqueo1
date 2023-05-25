@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('Clientes', function (Blueprint $table) {
             $table->integer('id_cliente')->primary();
-            $table->string('id_rol', 25)->nullable()->index('fk_cliente_rol_idx');
-            $table->integer('id_usuario')->nullable()->index('fk_cliente_usuario_idx');
+            
+            $table->unsignedBigInteger('id_usuario')->nullable()->index('fk_cliente_usuario_idx');
         });
     }
 

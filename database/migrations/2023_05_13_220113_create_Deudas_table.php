@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('Deudas', function (Blueprint $table) {
             $table->integer('id_deuda')->primary();
-            $table->integer('id_salida')->nullable()->index('fk_id_salida_idx');
+            $table->unsignedInteger('id_salida')->nullable()->index('fk_id_salida_idx');
             $table->integer('monto')->nullable();
             $table->string('id_precio', 25)->nullable()->index('fk_deuda_precio_idx');
         });

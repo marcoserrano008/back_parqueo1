@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('Guardias', function (Blueprint $table) {
             $table->integer('id_guardia')->primary();
             $table->date('fecha_incorporacion')->nullable();
-            $table->integer('id_usuario')->nullable()->index('fk_guardia_usuario_idx');
+            $table->unsignedBigInteger('id_usuario')->nullable()->index('fk_guardia_usuario_idx');
         });
     }
 

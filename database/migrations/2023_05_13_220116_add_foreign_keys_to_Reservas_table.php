@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::table('Reservas', function (Blueprint $table) {
             $table->foreign(['id_espacio'], 'fk_id_espacio')->references(['id_espacio'])->on('Espacios')->onUpdate('NO ACTION')->onDelete('NO ACTION');
             $table->foreign(['id_vehiculo'], 'fk_id_vehiculo')->references(['id_vehiculo'])->on('Vehiculos')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+            $table->foreign(['id_usuario'], 'fk_reserva_usuario')->references(['id'])->on('users')->onUpdate('NO ACTION')->onDelete('NO ACTION');
         });
     }
 
@@ -29,6 +30,7 @@ return new class extends Migration
         Schema::table('Reservas', function (Blueprint $table) {
             $table->dropForeign('fk_id_espacio');
             $table->dropForeign('fk_id_vehiculo');
+            $table->dropForeign('fk_reserva_usuario');
         });
     }
 };

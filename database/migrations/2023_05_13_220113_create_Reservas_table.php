@@ -14,14 +14,22 @@ return new class extends Migration
     public function up()
     {
         Schema::create('Reservas', function (Blueprint $table) {
-            $table->integer('id_reserva')->primary();
+            $table->increments('id_reserva')->start(1000);
             $table->string('id_espacio', 15)->nullable()->index('fk_id_espacio_idx');
-            $table->string('id_vehiculo', 20)->nullable()->index('fk_id_vehiculo_idx');
-            $table->date('fecha_reservada')->nullable();
-            $table->time('hora_reservada')->nullable();
-            $table->date('fecha_creacion')->nullable();
-            $table->time('hora_creacion')->nullable();
-            $table->integer('duracion_horas')->nullable();
+            $table->unsignedInteger('id_vehiculo')->nullable()->index('fk_id_vehiculo_idx');
+            $table->date('reservada_desde_fecha')->nullable();
+            $table->time('reservada_desde_hora')->nullable();
+            $table->date('reservada_hasta_fecha')->nullable();
+            $table->time('reservada_hasta_hora')->nullable();
+            $table->date('fecha_creada')->nullable();
+            $table->time('hora_creada')->nullable();
+            $table->string('placa_vehiculo', 20)->nullable();
+            $table->unsignedBigInteger('id_usuario')->nullable()->index('fk_reserva_usuario_idx');
+            $table->date('reservada_desde_fechaG1')->nullable();
+            $table->time('reservada_desde_horaG1')->nullable();
+            $table->date('reservada_desde_fechaG2')->nullable();
+            $table->time('reservada_desde_horaG2')->nullable();
+
         });
     }
 
